@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import Header from './components/Header'
 import DataTable from './components/DataTable'
 import SearchInput from './components/SearchInput'
-import { emptyInvoices, invoices } from './data/invoices'
+import { invoices } from './data/invoices'
 import StatusBadge from './components/StatusBadge';
 
 
@@ -11,8 +11,6 @@ function App() {
 
 
   // Define the data for the DataTable
-  
-  //const invoiceData = emptyInvoices; // Test with emtpy data
   const invoiceData = invoices;
 
   const filteredInvoices = useMemo(() => {
@@ -31,7 +29,7 @@ function App() {
     key: string;
     label: string;
     className?: string;
-    render?: (value: any) => JSX.Element;
+    render?: (value: any) => React.ReactNode;
   }[] = [
     {
       key: 'id',
@@ -85,8 +83,8 @@ function App() {
           <DataTable 
             columns={columns} 
             dataRows={filteredInvoices}
-            onRowClick={(row) => console.log('optional onClick')}
-            loa
+            onRowClick={(row) => console.log('optional onClick ', row)}
+            loading={false}
           />
 
 

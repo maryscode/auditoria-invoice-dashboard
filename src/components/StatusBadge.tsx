@@ -1,4 +1,4 @@
-function StatusBadge({ status }) {
+function StatusBadge({ status }:{status: string}) {
     let badge;
     switch (status) {
         case 'error':

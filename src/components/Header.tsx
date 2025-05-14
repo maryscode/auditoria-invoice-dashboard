@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import auditoriaLogo from '../assets/auditoria-logo.svg'
 function Header() : JSX.Element {
   return (
@@ -7,9 +8,6 @@ function Header() : JSX.Element {
           <img src={auditoriaLogo} className="h-full w-auto block" alt="Auditoria logo" />
         </a>
       </div>
-      {/* <div className='py-10 px-8 text-center bg-black bg-linear-to-r from-[#555FB3] to-[#461770]'>
-        <h1 className='text-white text-3xl uppercase px-4'>Invoice Dashboard</h1>
-      </div> */}
     </header>
   )
 }

@@ -6,8 +6,9 @@ type Column = {
     key: string;
     label: string;
     className?: string;
-    render?: (value: string | number, row?: any) => JSX.Element;
+    render?: (value: string | number, row?: any) => React.ReactNode;
 };
+
 type SortConfig = {
     key: string;
     order: 'asc' | 'desc';
@@ -100,6 +101,7 @@ function DataTable({ columns, dataRows, onRowClick, loading=false }: {
 
                     <tbody>
                         {loading ? (
+                            // Loading state
                             <tr>
                                 <td colSpan={columns.length + (onRowClick ? 1 : 0)} className='bg-gray-100 p-10 h-40 text-center text-gray-600 italic'>
                                     Loading...
@@ -107,6 +109,7 @@ function DataTable({ columns, dataRows, onRowClick, loading=false }: {
                             </tr>
                         ) : (
                         <>
+                            {/* // Loaded but no data */}
                             {sortedData.length === 0 && (
                                 <tr>
                                     <td colSpan={columns.length + (onRowClick ? 1 : 0)} className='bg-gray-100 p-10 h-40 text-center text-gray-600 italic'>
@@ -115,6 +118,7 @@ function DataTable({ columns, dataRows, onRowClick, loading=false }: {
                                 </tr>
                             )}
                             
+                            {/* // Loaded and rendered data */}
                             {sortedData.map((row: any, index: number) => (
                                 <tr key={row.id} className={`${index % 2 ? 'bg-gray-100' : 'bg-white'} border-b border-gray-300 ${onRowClick && 'cursor-pointer group hover:bg-yellow-100 transition-all duration-300'}`}
                                     onClick={() => handleClick(row)}

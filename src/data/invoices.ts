@@ -1,5 +1,3 @@
-export const emptyInvoices : {}[] = [];
-
 export const invoices : {
     id: string
     vendor: string
