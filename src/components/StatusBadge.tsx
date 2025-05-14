@@ -16,5 +16,4 @@ function StatusBadge({ status }:{status: string}) {
     return badge;
 }
 
-//<span className='inline-block bg-yellow-400 py-2 px-4 rounded-3xl text-yellow-700 font-bold text-sm'>
 export default StatusBadge;

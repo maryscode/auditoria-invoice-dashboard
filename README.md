@@ -15,14 +15,14 @@ This project is a React + TypeScript + Vite implementation of a small reusable U
 -------------
 ## Component Details
 
-### <DataTable />
+### `<DataTable />`
 **Features**
 - Column-based sorting: toggles ascending and descending
 - Optional row click handler
 - Responsive layout. In this demo, Invoice, Balance, and Status columns are visible on mobile. This behavior is controlled via Tailwind utility classes provided in the `className` key of each `column` object
 
 **Props**
-- **columns:** Defines the headers (<thead><th>) of the table with optional render functions (e.g. StatusBadge)
+- **columns:** Defines the headers (`<thead><th>`) of the table with optional render functions (e.g. StatusBadge)
 - **dataRows:** Array of objects that represent each row of data
 - **onRowClick:**  (optional) Adds a clickable indicator (arrow) to each row and enables row click behavior when this function is provided
 - **loading:**  (optional) Boolean that displays loading state. Defaults to false
@@ -51,7 +51,7 @@ const columns = [
 ```
 
 
-### <StatusBadge />
+### `<StatusBadge />`
 **Features**
 Shows color-coded status tags.
 
@@ -64,7 +64,7 @@ Shows color-coded status tags.
 ```
 
 
-### <SearchInput />
+### `<SearchInput />`
 **Features**
 Debounced search input field with onChange and optional Enter key behavior.
 
@@ -75,7 +75,11 @@ Debounced search input field with onChange and optional Enter key behavior.
 
 **Example Usage**
 ```
-<SearchInput debounce={500} placeholder="Search invoices" onSearch={(e) => handleSearch(e)}/> 
+<SearchInput 
+    onSearch={(e) => handleSearch(e)} 
+    placeholder="Search invoices" 
+    debounce={500} 
+/> 
 ```
 -------------
 
@@ -102,15 +106,18 @@ Debounced search input field with onChange and optional Enter key behavior.
 
 ## Design Decisions
 
-- **DataTable** is fully reusable, with configurable columns and optional custom cell rendering via a `render` function in the column config.
-- **Sorting** is handled using `useMemo`, with ascending/descending toggle state stored in `useState`. Sorting is stable and works across all data types.
+- **DataTable** is fully reusable, with configurable columns and optional custom cell rendering via a `render` function in the column config to handle the status badge
+- **Sorting** is handled using `useMemo`, with ascending/descending toggle state stored in `useState`.
 - **Search** is implemented in the parent component to keep `DataTable` stateless and reusable. The `SearchInput` component supports optional debouncing and Enter key execution.
 - **StatusBadge** displays clear visual feedback for invoice status using color-coded tags.
 - Layout and components are responsive and styled with Tailwind CSS.
-- Pagination was not implemented to stay within the 4-hour time scope but is prepared for as a future enhancement.
+
+## Time Estimates
+- Estimated Development Time: 4 hours
+*(not including time exploring design look/feel)*
 
 ## Future Enhancements
-- Pagination
+- Pagination (ran out of time!)
 - Custom date formatting
 - Character limit for display
 - Rotating sortby icon

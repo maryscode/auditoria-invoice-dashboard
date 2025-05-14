@@ -7,24 +7,8 @@ import StatusBadge from './components/StatusBadge';
 
 
 function App() {
-    const [searchTerm, setSearchTerm] = useState('');
 
-
-  // Define the data for the DataTable
-  const invoiceData = invoices;
-
-  const filteredInvoices = useMemo(() => {
-    if (!searchTerm) return invoiceData;
-  
-    return invoiceData.filter((invoice) =>
-      invoice.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      invoice.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      invoice.status.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [invoiceData, searchTerm]);
-
-
-  // Columns Labels for the DataTable
+  // Column Labels for the DataTable
   const columns : {
     key: string;
     label: string;
@@ -58,6 +42,24 @@ function App() {
     }
   ];
 
+  // State to manage search term
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Define the data for the DataTable
+  const invoiceData = invoices;
+
+  // Filter the invoices based on the search term
+  const filteredInvoices = useMemo(() => {
+    if (!searchTerm) return invoiceData;
+  
+    return invoiceData.filter((invoice) =>
+      invoice.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      invoice.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      invoice.status.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [invoiceData, searchTerm]);
+
+  // Handle search input change
   const handleSearch = (searchInput: string) => {
     // console.log('Searching for:', searchInput);
     setSearchTerm(searchInput.trim().toLowerCase());
@@ -86,8 +88,6 @@ function App() {
             onRowClick={(row) => console.log('optional onClick ', row)}
             loading={false}
           />
-
-
           
         </div>
     </div>
