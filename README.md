@@ -16,13 +16,14 @@ This project is a React + TypeScript + Vite implementation of a small reusable U
 ### <DataTable />
 **Features**
 - Column-based sorting: toggles ascending and descending
-- Optional row click handler. 
-- Responsive layout. In this demo, on Invoice, Balance, and Status columns are visible on mobile. This behavior is controlled via Tailwind utility classes provided in the `className` key of each `column` object
+- Optional row click handler
+- Responsive layout. In this demo, Invoice, Balance, and Status columns are visible on mobile. This behavior is controlled via Tailwind utility classes provided in the `className` key of each `column` object
 
 **Props**
-- **columns:** Defines the headers (thead > th) of the table with optional render functions for StatusBadge
+- **columns:** Defines the headers (<thead><th>) of the table with optional render functions (e.g. StatusBadge)
 - **dataRows:** Array of objects that represent each row of data
-- **onRowClick:**  (optional) Including this functional prop will add an arrow to the end of the row and make the data row clickable.
+- **onRowClick:**  (optional) Adds a clickable indicator (arrow) to each row and enables row click behavior when this function is provided
+- **loading:**  (optional) Boolean that displays loading state. Defaults to false
 
 **Example Usage**
 ```
@@ -30,6 +31,7 @@ This project is a React + TypeScript + Vite implementation of a small reusable U
       columns={columns}
       dataRows={data}
       onRowClick={(row) => console.log(row)}
+      loading={false}
 />
 ```
 
@@ -62,14 +64,16 @@ Shows color-coded status tags.
 
 ### <SearchInput />
 **Features**
-Shows color-coded status tags.
+Debounced search input field with onChange and optional Enter key behavior.
 
 **Props**
-- **status:** Accepts "complete", "error", "pending". Any others outside of these labels will display as "Unknown". Prop value is sanitized with lowercase and trimmed.
+- **onSearch:** Callback triggered when user types or presses Enter
+- **placeholder:** (optional) Placeholder text in input field
+- **debounce:** (optional) Debounce delay in ms before calling onSearch fn.
 
 **Example Usage**
 ```
-<StatusBadge status="complete" /> 
+<SearchInput debounce={500} placeholder="Search invoices" onSearch={(e) => handleSearch(e)}/> 
 ```
 -------------
 

@@ -13,10 +13,11 @@ type SortConfig = {
     order: 'asc' | 'desc';
 };
 
-function DataTable({ columns, dataRows, onRowClick }: {
+function DataTable({ columns, dataRows, onRowClick, loading=false }: {
     columns: Column[];
     dataRows: any[];
     onRowClick?: (row: any) => void;    
+    loading?: boolean;
 }) {
   
     const [sortedBy, setSortedBy] = useState<SortConfig | null>({key: 'id', order: 'asc'});
@@ -98,41 +99,54 @@ function DataTable({ columns, dataRows, onRowClick }: {
                     </thead>
 
                     <tbody>
-                        {sortedData.length === 0 && (
+                        {loading ? (
                             <tr>
                                 <td colSpan={columns.length + (onRowClick ? 1 : 0)} className='bg-gray-100 p-10 h-40 text-center text-gray-600 italic'>
-                                    No invoices found
+                                    Loading...
                                 </td>
                             </tr>
-                        )}
-                        
-                        {sortedData.map((row: any, index: number) => (
-                            <tr key={row.id} className={`${index % 2 ? 'bg-gray-100' : 'bg-white'} border-b border-gray-300 ${onRowClick && 'cursor-pointer group hover:bg-yellow-100 transition-all duration-300'}`}
-                                onClick={() => handleClick(row)}
-                            >
-                                {columns.map((column: Column, colIndex: number) => {
-                                    const cellValue = row[column.key];
-                                    const cellContent = column.render ? column.render(cellValue, row) : cellValue;
-
-                                    return (
-                                        <td key={colIndex} className={`p-2 lg:p-4 ${column.className ?? ''}`}>
-                                            {cellContent}
-                                        </td>
-                                    );
-                                })}
-
-                                {onRowClick && (
-                                    <td className='p-2 lg:p-4'>
-                                        <img src={arrow} alt='Arrow' className='group-hover:translate-x-1 w-[10px] h-auto transition-all duration-300' />
+                        ) : (
+                        <>
+                            {sortedData.length === 0 && (
+                                <tr>
+                                    <td colSpan={columns.length + (onRowClick ? 1 : 0)} className='bg-gray-100 p-10 h-40 text-center text-gray-600 italic'>
+                                        No invoices found
                                     </td>
-                                )}
-                                
-                            </tr>
+                                </tr>
+                            )}
+                            
+                            {sortedData.map((row: any, index: number) => (
+                                <tr key={row.id} className={`${index % 2 ? 'bg-gray-100' : 'bg-white'} border-b border-gray-300 ${onRowClick && 'cursor-pointer group hover:bg-yellow-100 transition-all duration-300'}`}
+                                    onClick={() => handleClick(row)}
+                                >
+                                    {columns.map((column: Column, colIndex: number) => {
+                                        const cellValue = row[column.key];
+                                        const cellContent = column.render ? column.render(cellValue, row) : cellValue;
 
-                        ))}
+                                        return (
+                                            <td key={colIndex} className={`p-2 lg:p-4 ${column.className ?? ''}`}>
+                                                {cellContent}
+                                            </td>
+                                        );
+                                    })}
+
+                                    {onRowClick && (
+                                        <td className='p-2 lg:p-4'>
+                                            <img src={arrow} alt='Arrow' className='group-hover:translate-x-1 w-[10px] h-auto transition-all duration-300' />
+                                        </td>
+                                    )}
+                                    
+                                </tr>
+
+                            ))}
+
+                        </>
+                        )}
                     </tbody>
                 </table>
             </div>
+
+            {/* TO DO: Add Pagination */}
             <div className='flex flex-col sm:flex-row justify-between items-center mt-10'>
                 <div className='flex items-center mb-4 sm:mb-0'>
                     <span className='text-sm text-gray-500'>Showing 1 to 30 of {sortedData.length} entries</span>

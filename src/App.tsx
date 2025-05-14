@@ -86,6 +86,7 @@ function App() {
             columns={columns} 
             dataRows={filteredInvoices}
             onRowClick={(row) => console.log('optional onClick')}
+            loa
           />
 
 

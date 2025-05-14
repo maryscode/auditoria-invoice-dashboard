@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react"
 
-function SearchInput({onSearch, placeholder, debounce = 0}) {
+type SearchInputProps = {
+    onSearch: (value: string) => void;
+    placeholder?: string;
+    debounce?: number;
+};
+
+function SearchInput({onSearch = () => {}, placeholder="Search", debounce = 0} : SearchInputProps) {
+    
     const [searchTerm, setSearchTerm] = useState('')
     
 
