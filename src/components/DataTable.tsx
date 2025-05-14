@@ -73,8 +73,8 @@ function DataTable({ columns, dataRows, onRowClick, loading=false }: {
             
             <div className='overflow-hidden rounded-xl '>
                 <table className='text-left table-auto w-full max-w-3xl border-collapse border-none'>
-                    <thead>
-                        <tr className="text-white bg-linear-to-r from-[#555FB3] to-[#461770] border-none text-sm lg:text-base">
+                    <thead className='bg-[#461770] '>
+                        <tr className="text-white border-none text-sm lg:text-base">
                             {columns.map((column: Column, index: number) => (
                                 <th 
                                     key={column.key || index}

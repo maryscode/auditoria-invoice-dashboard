@@ -1,6 +1,8 @@
 # Senior UI Engineer Take-Home Challenge
 This project is a React + TypeScript + Vite implementation of a small reusable UI component library for a fictional internal admin tool. It includes a sortable, searchable invoice table and supporting UI components.
 
+**Live Demo**: [http://auditoria-ui-test.staging-domain.com/](http://auditoria-ui-test.staging-domain.com/)
+
 ## Quickstart
 
 1. Clone the repo, install dependencies, and run the dev server:
@@ -113,3 +115,4 @@ Debounced search input field with onChange and optional Enter key behavior.
 - Character limit for display
 - Rotating sortby icon
 - Custom animated loading icon
+- Dark mode styles
